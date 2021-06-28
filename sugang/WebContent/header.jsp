@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-	#header { border: 1px solid black; }
+	#header { border: 1px solid black; padding : 15px; }
 	#headerTitle { text-align:center; }
 </style>
 <title>Insert title here</title>
