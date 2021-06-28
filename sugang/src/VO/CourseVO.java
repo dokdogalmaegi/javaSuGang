@@ -8,7 +8,14 @@ public class CourseVO {
 	private int week;
 	private int start_hour;
 	private int end_end;
+	private String lecturer;
 	
+	public String getLecturer() {
+		return lecturer;
+	}
+	public void setLecturer(String lecturer) {
+		this.lecturer = lecturer;
+	}
 	public String getId() {
 		return id;
 	}

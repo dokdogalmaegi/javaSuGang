@@ -55,11 +55,15 @@
 						<td><%=weekArr[(vo.getWeek() - 1)] %></td>
 						<td><%=vo.getStart_hour() %></td>
 						<td><%=vo.getEnd_end() %></td>
-						<td></td>			
+						<td><a href="#">수정</a> / <a href="#">삭제</a></td>			
 					</tr>
 					<% } %>
 				</table>
+				<button style="float : right;" onclick="location.href = 'AddController'">
+					작성
+				</button>
 			</section>
+			
 		</div>
 		
 		<jsp:include page="footer.jsp"></jsp:include>

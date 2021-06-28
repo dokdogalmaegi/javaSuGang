@@ -1,8 +1,12 @@
+<%@page import="VO.lecturerVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="VO.CourseVO"%>
 <%@page import="DAO.CourseDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<lecturerVO> list = (ArrayList<lecturerVO>) request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +29,7 @@
 		
 		<div id="main">
 			<h2>교과목 추가</h2>
+			<form action="AddController" method="post">
 			<table>
 				<tr>
 					<td>교과목 코드</td>
@@ -37,9 +42,12 @@
 				<tr>
 					<td>담당강사</td>
 					<td>
-						<select name="l_name">
-							<option>김아무개</option>
-							<option>이아무개</option>
+						<select name="lecturer">
+							<%
+								for (lecturerVO vo : list) {
+							%>
+							<option value="<%=vo.getIdx()%>"><%=vo.getName() %></option>
+							<% } %>
 						</select>
 					</td>
 				</tr>		
@@ -51,17 +59,17 @@
 					<td>요일</td>
 					<td>
 						<label for="mon">월</label>
-						<input type="radio" name="week" id="mon"/>
+						<input type="radio" name="week" id="mon" value="1"/>
 						<label for="화">화</label>
-						<input type="radio" name="week" id="화"/>
+						<input type="radio" name="week" id="화" value="2"/>
 						<label for="수">수</label>
-						<input type="radio" name="week" id="수"/>
+						<input type="radio" name="week" id="수" value="3"/>
 						<label for="목">목</label>
-						<input type="radio" name="week" id="목"/>
+						<input type="radio" name="week" id="목" value="4"/>
 						<label for="금">금</label>
-						<input type="radio" name="week" id="금"/>
+						<input type="radio" name="week" id="금" value="5"/>
 						<label for="토">토</label>
-						<input type="radio" name="week" id="토"/>
+						<input type="radio" name="week" id="토" value="6"/>
 					</td>
 				</tr>	
 				<tr>
@@ -73,10 +81,11 @@
 					<td><input type="text" name="end_end"/></td>
 				</tr>
 				<tr>
-					<td><button>목록</button></td>
+					<td><a href="index.jsp">목록</a></td>
 					<td><button type="submit">완료</button></td>
 				</tr>
 			</table>
+			</form>
 		</div>
 		
 		<jsp:include page="footer.jsp"></jsp:include>

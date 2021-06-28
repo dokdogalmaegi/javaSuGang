@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import DBPKG.DBConnection;
 import VO.CourseVO;
+import VO.lecturerVO;
 
 public class CourseDAO {
 	Connection conn = null;
@@ -61,5 +62,55 @@ public class CourseDAO {
 		}
 		
 		return list;
+	}
+	
+	public ArrayList<lecturerVO> getLecutrer() {
+		ArrayList<lecturerVO> list = new ArrayList<lecturerVO>();
+		
+		try {
+			conn = DBConnection.getConnection();
+			sql = "select idx, name from lecturer_tbl";
+			stmt = conn.prepareStatement(sql);
+			
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				lecturerVO vo = new lecturerVO();
+				
+				vo.setIdx(rs.getInt(1));
+				vo.setName(rs.getString(2));
+				
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public int AddCourse(CourseVO vo) {
+		int cnt = 0;
+		try {
+			conn = DBConnection.getConnection();
+			
+			// sql = "insert into course_tbl values ('10001', '프로그래밍', 2, 1, 1, '0900', '1100')"
+			sql = "insert into course_tbl values (?, ?, ?, ?, ?, ?, ?)";
+			
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, vo.getId());
+			stmt.setString(2, vo.getName());
+			stmt.setInt(3, vo.getCredit());
+			stmt.setString(4, vo.getLecturer());
+			stmt.setInt(5, vo.getWeek());
+			stmt.setInt(6, vo.getStart_hour());
+			stmt.setInt(7, vo.getEnd_end());
+			
+			cnt = stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
 	}
 }
