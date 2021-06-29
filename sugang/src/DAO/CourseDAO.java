@@ -113,4 +113,72 @@ public class CourseDAO {
 		}
 		return cnt;
 	}
+	
+	public CourseVO getCourseById(String id) {
+		CourseVO vo = new CourseVO();
+		
+		try {
+			conn = DBConnection.getConnection();
+			
+			sql = "select * from course_tbl where id = ?";
+			
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, id);
+			
+			rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setId(rs.getString(1));
+				vo.setName(rs.getString(2));
+				vo.setCredit(rs.getInt(3));
+				vo.setLecturer(rs.getString(4));
+				vo.setWeek(rs.getInt(5));
+				vo.setStart_hour(rs.getInt(6));
+				vo.setEnd_end(rs.getInt(7));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
+	
+	public void updateCourse(CourseVO vo) {
+		try {
+			conn = DBConnection.getConnection();
+			
+			sql = "update COURSE_TBL set name = ?, credit = ?, lecturer = ?, week = ?, start_hour = ?, end_end = ? where id = ?";
+			
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, vo.getName());
+			stmt.setInt(2, vo.getCredit());
+			stmt.setString(3, vo.getLecturer());
+			stmt.setInt(4, vo.getWeek());
+			stmt.setInt(5, vo.getStart_hour());
+			stmt.setInt(6, vo.getEnd_end());
+			stmt.setString(7, vo.getId());
+			
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteCourse(String id) {
+		try {
+			conn = DBConnection.getConnection();
+			
+			sql = "delete from COURSE_TBL where id = ?";
+			
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, id);
+			
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

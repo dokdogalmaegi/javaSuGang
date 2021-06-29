@@ -55,7 +55,7 @@
 						<td><%=weekArr[(vo.getWeek() - 1)] %></td>
 						<td><%=vo.getStart_hour() %></td>
 						<td><%=vo.getEnd_end() %></td>
-						<td><a href="#">수정</a> / <a href="#">삭제</a></td>			
+						<td><a href="updateGyoCtrl?id=<%=vo.getId() %>">수정</a> / <a href="deleteGyoCtrl?id=<%=vo.getId() %>">삭제</a></td>			
 					</tr>
 					<% } %>
 				</table>

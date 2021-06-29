@@ -15,6 +15,8 @@ insert into course_tbl
 values
 ('10001', '프로그래밍', 2, 1, 1, '0900', '1100');
 
+select * from course_tbl where id = 10001;
+
 insert into course_tbl
 values
 ('10002', '객체지향 프로그래밍', 2, 2, 2, '0900', '1200');
